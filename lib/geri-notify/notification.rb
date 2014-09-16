@@ -1,4 +1,4 @@
-module GrriNotify
+module GeriNotify
   class Notification
     def initialize(app_name, app_icon, summary, body, actions, hints, expire_time)
       @app_name = app_name
