@@ -19,9 +19,9 @@ class DBusConnector < DBus::Object
       puts "Should be closing #{id}, if i knew how to do it"
     end
 
-    dbus_method :GetServerInformation, "out name:s, out vendor:s, out version:s" do
+    dbus_method :GetServerInformation, "out name:s, out vendor:s, out version:s, out specs_version:s" do
       puts "GetServerInformation"
-      ["gerri-notify", "knopwob", GerriNotify::VERSION.to_s]
+      ["gerri-notify", "knopwob", GerriNotify::VERSION.to_s, "1.2"]
     end
 
     dbus_signal :NotificationClosed, "id:u, reason:u"
