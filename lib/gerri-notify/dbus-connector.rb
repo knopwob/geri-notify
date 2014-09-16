@@ -10,8 +10,8 @@ class DBusConnector < DBus::Object
       ["body"]
     end
 
-    dbus_method :Notify, "in app_name:s, in replaces_id:u, in app_icon:s, in summary:s, in body:s, in actions:a, in hints:d, in expire_time:i, out notification_id:i" do |app_name,replaces_id,app_icon,summary,body,actions,hints,expire_time|
-      puts "#{app_name}: #{summary} -- #{body}"
+    dbus_method :Notify, "in app_name:s, in replaces_id:u, in app_icon:s, in summary:s, in body:s, in actions:a, in hints:d, in expire_timeout:i, out notification_id:i" do |app_name,replaces_id,app_icon,summary,body,actions,hints,expire_time|
+      n = Notification.new(app_name, app_icon, summary, body, actions, hints, expire_time)
       1
     end
 
