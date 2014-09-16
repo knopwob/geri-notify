@@ -1,4 +1,4 @@
-module GerriNotify
+module GeriNotify
   require 'dbus'
   require 'pry'
   class Runner
@@ -30,5 +30,3 @@ module GerriNotify
     end
   end
 end
-
-
