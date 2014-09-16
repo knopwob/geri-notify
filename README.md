@@ -1,2 +1,2 @@
-gerri-notify
+geri-notify
 ============

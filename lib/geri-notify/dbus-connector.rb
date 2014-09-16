@@ -1,4 +1,4 @@
-module GerriNotify
+module GeriNotify
   require 'dbus'
   require 'pry'
 class DBusConnector < DBus::Object
@@ -21,7 +21,7 @@ class DBusConnector < DBus::Object
 
     dbus_method :GetServerInformation, "out name:s, out vendor:s, out version:s, out specs_version:s" do
       puts "GetServerInformation"
-      ["gerri-notify", "knopwob", GerriNotify::VERSION.to_s, "1.2"]
+      ["geri-notify", "knopwob", GeriNotify::VERSION.to_s, "1.2"]
     end
 
     dbus_signal :NotificationClosed, "id:u, reason:u"

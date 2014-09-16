@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'geri-notify'
+
+runner = GeriNotify::Runner.new
+runner.run
