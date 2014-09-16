@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require 'gerri-notify'
+
+
+
+runner = GerriNotify::Runner.new
+runner.run
