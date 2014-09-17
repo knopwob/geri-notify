@@ -9,31 +9,33 @@ module GeriNotify
       @body = body
       @actions = actions
       @hints = hints
-      if expire_time >= 0
-        # expire_time per api is in milliseconds but we use seconds internally
-        @expire_time = expire_time / 1000
-      else
-        @expire_time = 15 # TODO default time should be configurable
-      end
-
       @timestamp = Time::now
 
-      if hints.has_key?("urgency")
-        @urgency = case hints["urgency"]
-        when 0
-          :low
-        when 1
-          :normal
-        when 2
-          :critical
-        else
-          :normal
-        end
-      else
-        @urgency = :normal
-      end
+      normalize_expire_time(expire_time)
+      resolve_urgency(hints["urgency"])
 
       puts "new notification: #{@app_name}: #{@summary} -- #{@body}"
+    end
+
+    def resolve_urgency(raw_urgency)
+      @urgency = case raw_urgency
+      when 0
+        :low
+      when 1
+        :normal
+      when 2
+        :critical
+      else
+        :normal
+      end
+    end
+
+    def normalize_expire_time(raw_expire_time)
+      if raw_expire_time >= 0
+        @expire_time = raw_expire_time / 1000
+      else
+        @expire_time = 15 # TODO configurable default value
+      end
     end
 
     def expired?
