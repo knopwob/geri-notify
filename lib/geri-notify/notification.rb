@@ -19,15 +19,15 @@ module GeriNotify
       @timestamp = Time::now
 
       if hints.has_key?("urgency")
-        case hints["urgency"]
+        @urgency = case hints["urgency"]
         when 0
-          @urgency = :low
+          :low
         when 1
-          @urgency = :normal
+          :normal
         when 2
-          @urgency = :critical
+          :critical
         else
-          @urgency = :normal
+          :normal
         end
       else
         @urgency = :normal
@@ -38,9 +38,9 @@ module GeriNotify
 
     def expired?
       if expire_time == 0
-          false
+        false
       else
-          @timestamp + @expire_time > Time::now
+        @timestamp + @expire_time > Time::now
       end
     end
   end
