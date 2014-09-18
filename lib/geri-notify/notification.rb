@@ -15,7 +15,9 @@ module GeriNotify
       @body = body
       @actions = actions
       @hints = hints
-      @timestamp = Time::now
+      @timestamp = Time.now
+      @state = :pending
+      @display_timestamp = nil
 
       normalize_expire_time(expire_time)
       resolve_urgency(hints["urgency"])
@@ -44,12 +46,43 @@ module GeriNotify
       end
     end
 
-    def expired?
-      if expire_time == 0
-        false
-      else
-        @timestamp + @expire_time > Time::now
+    def activate!
+      @state == :active
+      @display_timestamp = Time.now
+    end
+
+    def update
+      if @state == :active && @display_timestamp + @expire_time > Time.now
+        @state = :expired
       end
+    end
+
+    def expired?
+      @state == :expired
+    end
+
+    def pending?
+      @state == :pending
+    end
+
+    def active?
+      @state == :active
+    end
+
+    def closed_by_user?
+      @state == :closed_by_user
+    end
+
+    def closed_by_remote?
+      @state == :closed_by_remote
+    end
+
+    def close_by_user!
+      @state == :closed_by_user
+    end
+
+    def close_by_remote!
+      @state == :closed_by_remote
     end
 
     def <=>(other)
